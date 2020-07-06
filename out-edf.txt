@@ -1,0 +1,34 @@
+0 Food2
+1 Food2
+2 Food1
+3 Food3
+4 Food3
+5 Food3
+6 Food3
+7 Food2
+8 Food2
+9 Food1
+10 Food2
+11 Food2
+12 Food1
+13 Food3
+14 Food3
+15 Food3
+16 Food3
+17 Food2
+18 Food2
+19 Food1
+20 Food2
+21 Food2
+22 Food3
+23 Food3
+24 Food3
+25 Food3
+26 Food1
+27 Food2
+28 Food2
+29 Idle
+Idle time = 1
+Food1 waiting time = 8
+Food2 waiting time = 6
+Food3 waiting time = 8

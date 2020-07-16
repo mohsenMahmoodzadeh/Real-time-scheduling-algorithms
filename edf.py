@@ -1,27 +1,26 @@
 from queue import Queue
 
+def is_schedulable(events):
+    utilization = 0
+    for i in range(len(events)):
+        event = events[i]
+        duration = event.duration
+        period = event.period
+        utilization += (duration/period)
+
+    if utilization >= 1:
+        print("Can't handle orders today")
 
 
 def earliest_deadline_first(events, end_time):
+    is_schedulable(events) 
+        
     out_str = ""
-    # priority = []
-    # for i in range(len(events)):
-    #     event = events[i]
-    #     id = event.id
-    #     deadline = event.deadline
-    #     priority.append((id, deadline))
-
-    # priority.sort(key = lambda x: x[1])
-
     event_deadlines_in_lcm = []
     q = Queue(maxsize=end_time)
 
     for i in range(len(events)):
         event = events[i]
-        # id = event.id
-        # name = event.name
-        # deadline = event.deadline
-        # get_deadlines_in_lcm(id, deadline)
         get_deadlines_in_lcm(event, end_time, event_deadlines_in_lcm)  
 
     event_deadlines_in_lcm.sort(key = lambda x: x[1])
@@ -34,13 +33,11 @@ def earliest_deadline_first(events, end_time):
     deadline = None
     lock = True
 
-    # switches = 0
     idle = 0
     for time in range(end_time):
         if lock == True:
             if q.empty():
                 idle += 1
-                # print(str(time + 1) + ' ' + "Idle")
                 print(str(time) + ' ' + "Idle")
                 out_str += (str(time) + ' ' + "Idle")
                 out_str += '\n'
@@ -49,13 +46,12 @@ def earliest_deadline_first(events, end_time):
             
             if event is  None:
                 idle += 1
-                # print(str(time + 1) + ' ' + "Idle")
                 print(str(time) + ' ' + "Idle")
                 out_str += (str(time) + ' ' + "Idle")
                 out_str += '\n'
-                # continue    
+                    
             else:
-                # switches += 1
+                
                 duration = event.duration
                 lock = False
          
@@ -65,15 +61,12 @@ def earliest_deadline_first(events, end_time):
             out_str += '\n'
             pass
         else:
-            # duration = event.duration
             duration-= 1 
             if duration == 0:
                 lock = True
                 event.waiting_time += ((time+1 - event.arrival_time) - event.duration)
-                # event.waiting_time += ((deadline - event.arrival_time) - event.duration)
                 event.arrival_time += event.period
 
-            # print(str(time + 1) + ' ' + event.name)
             print(str(time) + ' ' + event.name)
             out_str += (str(time) + ' ' + event.name)
             out_str += '\n'
@@ -81,24 +74,21 @@ def earliest_deadline_first(events, end_time):
     print('Idle time = ' + str(idle))
     out_str += ('Idle time = ' + str(idle))
     out_str += '\n'
-    # print('Switches = ' + str(switches - 1))
     
     for event in events:
         print(event.name +  ' waiting time = ' + str(event.waiting_time))
         out_str += (event.name +  ' waiting time = ' + str(event.waiting_time))
         out_str += '\n'
 
-
     
-    # output_file = open("out-edf.txt", "w")
-    # output_file.writelines(out_str)
-    # output_file.close()
+    output_file = open("out-edf.txt", "w")
+    output_file.writelines(out_str)
+    output_file.close()
 
     return None
 
 def get_deadlines_in_lcm(event, end_time, event_deadlines_in_lcm):
-    # name = event.name
-    
+
     deadline = event.deadline
     period = event.period
     # print(deadline)

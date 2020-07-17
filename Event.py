@@ -11,7 +11,8 @@ class Event:
         self.arrival_time = 0
         self.arrival_time = 0
         self.waiting_time = 0
-        self.laxity = self.deadline - self.duration
+        self.laxity = (self.deadline + self.arrival_time) - self.current_duration
         self.current_laxity = self.laxity
+        self.miss_deadline = False
     
     

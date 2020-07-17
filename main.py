@@ -23,5 +23,5 @@ for i in range(1, food_count + 1):
 time = 0
 end_time = lcm(periods)
 # earliest_deadline_first(events, end_time)
-rate_monotonic(events, end_time)
-# least_laxity_first(events, end_time)
+# rate_monotonic(events, end_time)
+least_laxity_first(events, end_time)
